@@ -1,7 +1,7 @@
 class Player {
-	constructor(name, avatar) {
+	constructor(name) {
 		this.name = name || 'computer';
-		this.token = avatar || 'img';
+		this.token = 'assets/Icons/evilComputer.png';
 		this.wins = 0;
 		this.weapon = {} 
 		this.currentGame = {};
@@ -13,6 +13,10 @@ class Player {
 		} else {
 			this.weapon = playerChoice
 		}
+	}
+
+	chooseAvatar() {
+		this.token = avatar[Math.floor(Math.random() * avatar.length)]
 	}
 
 }

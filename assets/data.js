@@ -11,3 +11,16 @@ var alternate = [
 	{name: 'fire', strongAgainst: ['heart', 'wind']},
 	{name: 'wind', strongAgainst: ['water', 'heart']},
 ]
+
+var avatar = [
+	'./assets/Icons/chick.png',
+	'./assets/Icons/dinosaur.png',
+	'./assets/Icons/elephant.png',
+	'./assets/Icons/fox.png',
+	'./assets/Icons/jellyfish.png',
+	'./assets/Icons/koala.png',
+	'./assets/Icons/snake.png',
+	'./assets/Icons/toucan.png',
+	'./assets/Icons/turtle.png',
+	'./assets/Icons/whale.png'
+]
