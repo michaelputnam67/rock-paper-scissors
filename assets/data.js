@@ -1,10 +1,10 @@
-var weaponsClassic = [
+var classic = [
 	{name: "scissors", strongAgainst: ['paper']},
 	{name: "rock", strongAgainst: ['scissors']},
 	{name: "paper", strongAgainst: ['rock']}
 ]
 
-var weaponsAlternate = [
+var alternate = [
 	{name: 'heart', strongAgainst: ['water', 'earth']},
 	{name: 'water', strongAgainst: ['fire', 'earth']},
 	{name: 'earth', strongAgainst: ['fire', 'wind']},

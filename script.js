@@ -1,10 +1,10 @@
-var game = new Game('classic')
-player1 = new Player('Mike', weaponsClassic[1])
-console.log('Mike', player1.weapon.name)
-player2 = new Player('Artan', weaponsClassic[1])
-console.log('Artan', player2.weapon.name)
+var game = new Game(alternate)
+var player1 = new Player()
+var player2 = new Player('Daniel')
 game.addPlayers(player1)
 game.addPlayers(player2)
-
+player1.takeTurn()
+player2.takeTurn(alternate[2])
 
 console.log(game.resolveResults())
+console.log(game)
