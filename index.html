@@ -5,45 +5,58 @@
 		<link rel="stylesheet" href="./styles.css">
 	</head>
 	<body>
-		<main>
-			<section class="top-display">
+		<div class="screen hidden"></div>
+		<section class="form hidden">
+			<section class="form-avatar">
+				<img class="avatar-icon" src="assets/Icons/dinosaur.png" alt="dinosur">
+				<button class="change-avatar">change avatar</button>
+				<label for="change-avatar">Toggle through and Pick an Avatar!</label>
+			</section>
+			<form class="user-generation">
+				<input type="text" name="user" id="name" class="user-name" maxLength="9">
+				<label for="name">Please input a name for your player!</label>
+				<button class='generate-user' type=submit>Generate Player</button>
+			</form>
+		</section>
+		<main id="main">
+			<section class="top-display" id="homeTopView">
 				<h1>Rock, Paper Scissors</h1>
-				<section class="display-games">
-					<section class="games games-classic">
-						<h2>Classic</h2>
-						<li class="games-figures classic">
-							<figure class="figures-weapon"></figure>
-							<figure class="figures-weapon"></figure>
-							<figure class="figures-weapon"></figure>
-						</li>
-					</section>
-					<section class="games games-bote">
-						<h2>Battle of the Elements</h2>
-						<li class='games-figures alternate'>
-							<figure class="figures-weapon"></figure>
-							<figure class="figures-weapon"></figure>
-							<figure class="figures-weapon"></figure>
-							<figure class="figures-weapon"></figure>
-							<figure class="figures-weapon"></figure>
-						</li>
-					</section>
+				<section class="display-games" id="gameOptions">
+					<button id="classic" data-game="classic">
+						<section class="games games-classic" data-game="classic">
+							<h2>Classic</h2>
+						</section>
+					</button>
+					<button id="alternate" data-game="alternate">
+						<section class="games games-bote" data-game="alternate">
+							<h2 data-game="alternate">Battle of the Elements</h2>						
+						</section>
+					</button>
 				</section>
 				<p>Pick which edition you wish to play!</p>
 			</section>
-			<section class="player-display">
+			<section class="player-display" id="playerDisplay">
 				<section class="display-player">
 					<section class="player-box">
-						<figure class="player-avatar"></figure>
-						<label>User</label>
+						<figure class="player-avatar">
+							<img src="assets/Icons/evilComputer.png" alt="evil-computer">
+						</figure>
+						<label class="player-name">Computer</label>
 					</section>
-					<div class="tally"></div>
+					<div class="tally" id="computerScore">
+						Wins = 0
+					</div>
 				</section>
 				<section class="display-player">
 					<section class="player-box">
-						<figure class="player-avatar"></figure>
-						<label>Computer</label>
+						<figure class="player-avatar">
+							<img id="userAvatar" src="assets/Icons/dinosaur.png" alt="dinosaur">
+						</figure>
+						<label class="player-name" id="userName">User</label>
 					</section>
-					<div class="tally"></div>
+					<div class="tally" id="userScore">
+						Wins = 0
+					</div>
 				</section>
 			</section>
 		</main>
@@ -51,5 +64,39 @@
 	<script type="text/javascript" src="assets/data.js"></script>
 	<script type="text/javascript" src="player-class.js"></script>
 	<script type="text/javascript" src="game-class.js"></script>
-	<script type="text/javascript" src="script.js"></script>
+	<script type="text/javascript" src="main.js"></script>
 </html>
+
+
+
+<!-- 
+<li class='games-figures alternate' data-game="alternate">
+	<figure class="figures-weapon" data-game="alternate">
+		<img src="assets/Icons/rock.png" alt="rock icon">
+	</figure>
+	<figure class="figures-weapon" data-game="alternate">
+		<img src="assets/Icons/flames.png" alt="flames icon">
+	</figure>
+	<figure class="figures-weapon" data-game="alternate">
+		<img src="assets/Icons/wind.png" alt="wind icon">
+	</figure>
+	<figure class="figures-weapon" data-game="alternate">
+		<img src="assets/Icons/water.png" alt="water icon">
+	</figure>
+	<figure class="figures-weapon" data-game="alternate">
+		<img src="assets/Icons/heart.png" alt="hand holding heart icon">
+	</figure>
+</li> -->
+
+
+<!-- <li class="games-figures classic" data-game="classic">
+	<figure class="figures-weapon" data-game="classic">
+		<img src="assets/Icons/rock-2.png" alt="rock icon">
+	</figure>
+	<figure class="figures-weapon" data-game="classic">
+		<img src="assets/Icons/paper.png" alt="news paper icon">
+	</figure>
+	<figure class="figures-weapon" data-game="classic">
+		<img src="assets/Icons/scissors.png" alt="scissors icon">
+	</figure>
+</li> -->

@@ -1,16 +1,33 @@
-var classic = [
-	{name: "scissors", strongAgainst: ['paper']},
+var classic = {
+	name: 'ROCK, PAPER, SCISSORS CLASSIC',
+	description: 'Rock beats Scissors. Paper beats Rock. 			Scissors beats Paper. Click one of the above icons to make your choice. Choose wisely!',
+	images: 
+		[	{img:'assets/Icons/paper.png', alt:'paper icon'},
+			{img:'assets/Icons/rock-2.png', alt:'rock icon'},
+			{img:'assets/Icons/scissors.png', alt:'scissors icon'}],
+	weapons: [
+	{name: "paper", strongAgainst: ['rock']},
 	{name: "rock", strongAgainst: ['scissors']},
-	{name: "paper", strongAgainst: ['rock']}
-]
+	{name: "scissors", strongAgainst: ['paper']},]
+}
 
-var alternate = [
-	{name: 'heart', strongAgainst: ['water', 'earth']},
-	{name: 'water', strongAgainst: ['fire', 'earth']},
+var alternate = {
+	name: 'BATTLE OF THE ELEMENTS',
+	description: 'Heart beats water and earth. Water beats fire and earth. Earth beats fire and wind. Fire beats heart and wind. Wind beats water and heart. Click one of the above icons to make your choice. Choose Wisely!',
+	images: [
+		{img:'assets/Icons/earth.png', alt:'rock icon'},
+		{img:'assets/Icons/flames.png', alt:'flames icon'},
+		{img:'assets/Icons/wind.png', alt:'wind icon'},
+		{img:'assets/Icons/water.png', alt:'water icon'},
+		{img:'assets/Icons/heart.png', alt:'heart icon'}
+	],
+	weapons: [
 	{name: 'earth', strongAgainst: ['fire', 'wind']},
 	{name: 'fire', strongAgainst: ['heart', 'wind']},
 	{name: 'wind', strongAgainst: ['water', 'heart']},
-]
+	{name: 'water', strongAgainst: ['fire', 'earth']},
+	{name: 'heart', strongAgainst: ['water', 'earth']}]
+}
 
 var avatar = [
 	'./assets/Icons/chick.png',
@@ -24,3 +41,12 @@ var avatar = [
 	'./assets/Icons/turtle.png',
 	'./assets/Icons/whale.png'
 ]
+
+
+
+
+
+
+
+
+
