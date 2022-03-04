@@ -30,7 +30,6 @@ html, body, .screen {
 .form {
 	display: flex;
 	justify-content: center;
-	
 	background-color: rgb(190, 195, 200);
 	border: black solid 2px;
 	height: 300px;
@@ -78,6 +77,17 @@ main {
 	align-items: center;
 	align-content: center;
 	height: 75%;
+}
+
+.game-view > .top-display{
+	display: flex;
+	
+}
+
+.game-view-weapons {
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
 }
 
 h1 {
@@ -129,14 +139,10 @@ h2 {
 }
 
 .figures-weapon {
-	height: 100%;
-	width: 100%;
+	height: 8em;
+	width: 8em;
 	padding: 0;
 	margin: 0;
-}
-
-.hidden {
-	display: none;
 }
 
 .player-display {
@@ -184,4 +190,8 @@ img {
 	font-size: xx-large;
 	font-weight: 100;
 	width: 100%;
+}
+
+.hidden {
+	display: none;
 }
