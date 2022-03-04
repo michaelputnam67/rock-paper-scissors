@@ -1,8 +1,4 @@
 
-* {
-	/* border: 1px solid pink; */
-	
-}
 
 html, body, .screen {
 	display: grid;
@@ -71,6 +67,10 @@ main {
 	width: inherit;
 }
 
+.game-description {
+	text-align: center;
+}
+
 .top-display {
 	display: flex;
 	flex-direction: column;
@@ -81,7 +81,7 @@ main {
 
 .game-view > .top-display{
 	display: flex;
-	
+
 }
 
 .game-view-weapons {
@@ -113,9 +113,11 @@ p {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	height: 65%;
+	height: 300px;
+	width: 400px;
 	background-color: #D7FCD4;
 	border: black 2px solid;
+	margin: 0;
 }
 
 .classic {

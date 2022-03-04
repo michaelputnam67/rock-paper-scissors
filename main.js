@@ -4,16 +4,12 @@
 // game.addPlayers(player1)
 // game.addPlayers(player2)
 // player1.takeTurn()
-// player2.takeTurn(alternate[2])
+// player2.takeTurn(alternate.weapons[3])
 // player2.chooseAvatar()
-// console.log(player1.token)
-// console.log(player2.token)
 // console.log(game.resolveResults())
-// console.log(game)
 //~~~~~~~~~~~~~~~~~Globals~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 var currentPlayers = []
 var currentGame;
-
 
 //~~~~~~~~~~~~~~~~~~SELECTORS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 var avatarButton = document.querySelector('.change-avatar')
@@ -25,20 +21,20 @@ var classicButton = document.getElementById('classic')
 var topDisplay = document.getElementById('homeTopView')
 var bottomDisplay = document.getElementById('playerDisplay')
 var main = document.getElementById('main')
-
+var gameDisplay = document.getElementById('gameOptions')
 
 //~~~~~~~~~~~~~~~~~~EVENT LISTENERS~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // window.addEventListener('load', displayForm)
 avatarButton.addEventListener('click', changeFormAvatarIcon)
+
 generateUserButton.addEventListener('click', function() {
 	event.preventDefault()
 	generatePlayerOne()
 })
-alternateButton.addEventListener('click', function(){
-	switchToAlternateBattleWindow()
+
+gameDisplay.addEventListener('click', function(event){
+	startNewGame(event)
 })
-
-
 
 //~~~~~~~~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 function displayForm() {
@@ -55,7 +51,6 @@ function generatePlayerOne() {
 		currentPlayers.push(new Player(userNameInput.value))
 		currentPlayers[0].token = formAvatarIcon.src
 		currentPlayers.push(new Player)
-		console.log(currentPlayers)
 		populateUserData()
 		document.querySelector('.screen').classList.add('hidden')
 		document.querySelector('.form').classList.add('hidden')
@@ -73,6 +68,17 @@ function populateUserData() {
 	}
 }
 
+function startNewGame(event) {
+	console.log(event.target.dataset.game)
+	if(event.target.dataset.game === "classic" || event.target.dataset.game === "alternate") {
+		currentGame = new Game(eval(event.target.dataset.game))
+		currentGame.addPlayers(currentPlayers)
+		console.log(currentGame)
+		switchToAlternateBattleWindow()
+		addDisplayEventListener()	
+	}
+}
+
 function switchToAlternateBattleWindow() {
 	topDisplay.classList.add('hidden')
 	var battleSection = document.createElement('section')
@@ -80,40 +86,44 @@ function switchToAlternateBattleWindow() {
 	battleSection.classList.add('top-display')
 	addHeader(battleSection)
 	addGameIcons(battleSection)
-	for(var i = 0; i < 5; i++) {
-
-	}
+	addLabel(battleSection)
 	main.insertBefore(battleSection, bottomDisplay)
-	addDisplayEventListener()	
+}
+
+function addLabel(battleSection) {
+	var label = document.createElement('p')
+	label.classList.add('game-description')
+	label.innerText = currentGame.description
+	battleSection.appendChild(label)
 }
 
 function addDisplayEventListener() {
 	var battleInterface = document.getElementById('battleInterface')
-	battleInterface.addEventListener('click', function() {
-		test()
+	battleInterface.addEventListener('click', function(event) {
+		test(event)
 	})
 }
 
-function test() {
-	console.log('test')
+function test(event) {
+	console.log(event.target)
 }
 
 function addHeader(battleSection) {
 	var header = document.createElement('h1')
-	header.innerText = 'Hello World!'
+	header.innerText = currentGame.name
 	battleSection.appendChild(header)
 }
 
 function addGameIcons(battleSection) {
 	var icons = document.createElement('div')
 	icons.classList.add('game-view-weapons')
-	for(var i = 0; i < alternate.section1.length; i++) {
-		var test = document.createElement('img')
-		test.src = alternate.section1[i].img
-		test.alt = alternate.section1[i].alt
-		test.classList.add('figures-weapon')
-		icons.appendChild(test)
+	for(var i = 0; i < currentGame.images.length; i++) {
+		var img = document.createElement('img')
+		img.src = currentGame.images[i].img
+		img.setAttribute('data-weapon', currentGame.weapons[i].name)
+		img.alt = currentGame.images[i].alt
+		img.classList.add('figures-weapon')
+		icons.appendChild(img)
 	}
 	battleSection.appendChild(icons)
 }
-
