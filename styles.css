@@ -1,15 +1,71 @@
 
 * {
-	border: 1px solid pink;
+	/* border: 1px solid pink; */
+	
 }
 
-html, body {
+html, body, .screen {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr;
+	grid-template-areas: 'overlap';
 	height: 100%;
 	width: 100%;
 	margin: 0;
+	background-color: #FFF5B2;
+}
+
+.screen {
+	grid-area: overlap;
+	background-color: rgb(183, 182, 182);
+	z-index: 1;
+	opacity: 80%;
+}
+
+/* form, main {
+	grid-column: 1;
+	grid-row: 1;
+} */
+
+.form {
+	display: flex;
+	justify-content: center;
+	
+	background-color: rgb(190, 195, 200);
+	border: black solid 2px;
+	height: 300px;
+	width: 500px;
+	grid-area: overlap;
+	align-self: center;
+	justify-self: center;
+	z-index: 1;
+}
+
+.user-generation {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: space-evenly;
+	flex-direction: column;
+	align-items: center;
+}
+
+.form-avatar {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+}
+
+.avatar-icon {
+	height: 10em;
+	width: 10em;
 }
 
 main {
+	grid-area: overlap;
 	display: flex;
 	flex-direction: column;	
 	height: inherit;
@@ -47,15 +103,18 @@ p {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	height: 60%;
+	height: 65%;
+	background-color: #D7FCD4;
+	border: black 2px solid;
 }
 
 .classic {
-	width: 300px
+	width: 400px
 }
 
 .alternate {
-	width: 450px;
+	height: 100%;
+	width: 600px;
 }
 
 h2 {
@@ -71,41 +130,9 @@ h2 {
 
 .figures-weapon {
 	height: 100%;
-	width: 45px;
+	width: 100%;
 	padding: 0;
 	margin: 0;
-}
-
-.classic figure:nth-child(1) {
-	background-color: black;
-}
-
-.classic figure:nth-child(2) {
-	background-color: green;
-}
-
-.classic figure:nth-child(3) {
-	background-color: yellow;
-}
-
-.alternate figure:nth-child(1) {
-	background-color: red;
-}
-
-.alternate figure:nth-child(2) {
-	background-color: blue;
-}
-
-.alternate figure:nth-child(3) {
-	background-color: orange;
-}
-
-.alternate figure:nth-child(4) {
-	background-color: brown;
-}
-
-.alternate figure:nth-child(5) {
-	background-color: grey;
 }
 
 .hidden {
@@ -116,22 +143,45 @@ h2 {
 	display: flex;
 	justify-content: space-around;
 	height: 25%;
+	background-color: #9E2B25;
 }
 
 .display-player {
 	display: flex;
-	width: 50%
+	width: 50%;
+	background-color: #9E2B25;
 }
 
 .player-box {
 	display: flex;
 	flex-direction: column;
-	width: 35%;
+	width: 20%;
+	align-items: center;	
+	justify-content: center;	
+	border: black solid 2px;
+}
+
+img {
+	height: 100%;
+	width: 100%;
 }
 
 .player-avatar {
-	background-color: aqua;
 	padding: 0;
 	margin: 0;
 	height: 60%;
+}
+
+.player-name {
+	font-size: xx-large;
+	flex-wrap: wrap;
+	margin-top: .5em;
+}
+
+.tally {
+	align-self: center;
+	text-align: center;
+	font-size: xx-large;
+	font-weight: 100;
+	width: 100%;
 }
