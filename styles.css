@@ -19,7 +19,7 @@ html, body, .screen {
 	grid-area: overlap;
 	background-color: rgb(183, 182, 182);
 	z-index: 1;
-	opacity: 80%;
+	opacity: 90%;
 }
 
 /* form, main {

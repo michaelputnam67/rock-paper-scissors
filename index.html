@@ -13,9 +13,9 @@
 				<label for="change-avatar">Toggle through and Pick an Avatar!</label>
 			</section>
 			<form class="user-generation">
-				<input type="text" name="user" id="name" class="user-name">
-				<label>Please input a name for your player!</label>
-				<button class='generate-user' type="button">Generate Player</button>
+				<input type="text" name="user" id="name" class="user-name" maxLength="9">
+				<label for="name">Please input a name for your player!</label>
+				<button class='generate-user' type=submit>Generate Player</button>
 			</form>
 		</section>
 		<main>
@@ -71,19 +71,19 @@
 						</figure>
 						<label class="player-name">Computer</label>
 					</section>
-					<div class="tally">
-						Wins = #
+					<div class="tally" id="computerScore">
+						Wins = 0
 					</div>
 				</section>
 				<section class="display-player">
 					<section class="player-box">
 						<figure class="player-avatar">
-							<img src="assets/Icons/dinosaur.png" alt="dinosaur">
+							<img id="userAvatar" src="assets/Icons/dinosaur.png" alt="dinosaur">
 						</figure>
-						<label class="player-name">User</label>
+						<label class="player-name" id="userName">User</label>
 					</section>
-					<div class="tally">
-						Wins = #
+					<div class="tally" id="userScore">
+						Wins = 0
 					</div>
 				</section>
 			</section>

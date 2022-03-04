@@ -15,6 +15,10 @@ class Player {
 		}
 	}
 
+	// selectName(playerInput) {
+	// 	this.name = playerInput;
+	// }
+
 	chooseAvatar() {
 		this.token = avatar[Math.floor(Math.random() * avatar.length)]
 	}
