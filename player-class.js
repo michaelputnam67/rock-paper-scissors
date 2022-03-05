@@ -7,11 +7,16 @@ class Player {
 		this.weaponsChoice = []
 	}	
 
-	takeTurn(playerChoice) {
+	takeTurn(playerChoice, currentGame) {
 		if(this.name === 'computer') {
 			this.weapon = this.weaponsChoice[Math.floor(Math.random() * this.weaponsChoice.length)]
 		} else {
-			this.weapon = playerChoice
+			for(var i = 0; i < this.weaponsChoice.length; i++) {
+				if(this.weaponsChoice[i].name === playerChoice) {
+					this.weapon = this.weaponsChoice[i]
+					return 
+				}
+			}
 		}
 	}
 
