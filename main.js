@@ -106,17 +106,20 @@ function addDisplayEventListener() {
 	var battleInterface = document.getElementById('battleInterface')
 	battleInterface.addEventListener('click', function(event) {
 		chooseWeapon(event)
-		results()
-		displayResults(battleInterface)
 	})
 }
 
 function chooseWeapon(event) {
+	if(!event.target.dataset.weapon) {
+		return
+	}
 	if(event.target.dataset.weapon) {
 		for(var i = 0; i < currentPlayers.length; i++) {
 			currentPlayers[i].takeTurn(event.target.dataset.weapon, currentGame)
 		}
 	}
+	results()
+	displayResults(battleInterface)
 }
 
 function results() {
@@ -132,6 +135,7 @@ function generateScores() {
 function displayResults(battleInterface) {
 	var resultsDisplay = document.createElement('section')
 	resultsDisplay.classList.add('results-display')
+	
 	for(var i = 0; i < currentGame.players.length; i++) {
 		var figure = document.createElement('figure')
 			var img = document.createElement('img')
@@ -144,12 +148,11 @@ function displayResults(battleInterface) {
 				figure.appendChild(figcaption)
 		resultsDisplay.appendChild(figure)
 	}
-	battleInterface.appendChild(resultsDisplay)
+	if(battleInterface.lastChild.className === 'results-display') {
+		battleInterface.replaceChild(resultsDisplay, battleInterface.lastChild);
+	} else {
+		battleInterface.appendChild(resultsDisplay)
+	}
 }
 
-// function createLabel(resultsDisplay, i) {
-// 	var label = document.createElement('label')
-// 	label.innerText = `${currentGame.players[i].name}'s Choice`
-// 	label.classList.add('label')
-// 	resultsDisplay.appendChild(label)
-// }
+
