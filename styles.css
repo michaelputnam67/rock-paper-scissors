@@ -109,6 +109,15 @@ p {
 	font-size: xx-large;
 }
 
+.results-display {
+	display: flex; 
+	align-items: center;
+	justify-content: space-evenly;
+	width: 100%;
+	height: 200px;
+}
+
+
 .games {
 	display: flex;
 	flex-direction: column;
@@ -196,4 +205,16 @@ img {
 
 .hidden {
 	display: none;
+}
+
+.results-icon {
+	display: flex;
+	flex-direction: column;
+	
+	
+}
+
+.label {
+	height: 10em;
+	width: 15em;
 }

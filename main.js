@@ -130,21 +130,26 @@ function generateScores() {
 }
 
 function displayResults(battleInterface) {
-	battleInterface.classList.add('hidden')
 	var resultsDisplay = document.createElement('section')
-	resultsDisplay.classList.add('top-display')
+	resultsDisplay.classList.add('results-display')
 	for(var i = 0; i < currentGame.players.length; i++) {
-		var img = document.createElement('img')
-		img.src = currentGame.players[i].weapon.img
-		img.alt = currentGame.players[i].weapon.alt
-		img.classList.add('figures-weapon')
-		resultsDisplay.appendChild(img)
+		var figure = document.createElement('figure')
+			var img = document.createElement('img')
+				img.src = currentGame.players[i].weapon.img
+				img.alt = currentGame.players[i].weapon.alt
+				img.classList.add('figures-weapon', 'results-icon')
+			var figcaption = document.createElement('figcaption')
+					figcaption.innerText = `${currentGame.players[i].name}'s Choice`
+				figure.appendChild(img)		
+				figure.appendChild(figcaption)
+		resultsDisplay.appendChild(figure)
 	}
-	main.insertBefore(resultsDisplay, bottomDisplay)
+	battleInterface.appendChild(resultsDisplay)
 }
 
-
-
-
-
-
+// function createLabel(resultsDisplay, i) {
+// 	var label = document.createElement('label')
+// 	label.innerText = `${currentGame.players[i].name}'s Choice`
+// 	label.classList.add('label')
+// 	resultsDisplay.appendChild(label)
+// }

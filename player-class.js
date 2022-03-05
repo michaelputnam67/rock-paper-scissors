@@ -23,5 +23,4 @@ class Player {
 	chooseAvatar() {
 		this.token = avatar[Math.floor(Math.random() * avatar.length)]
 	}
-
 }
