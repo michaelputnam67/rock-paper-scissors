@@ -85,7 +85,31 @@ function addLabel(battleSection) {
 function addHeader(battleSection) {
 	var header = document.createElement('h1')
 	header.innerText = currentGame.name
+		createNewButton ({parent: header, elements: battleSection, innerText: 'Return Home', class: 'return-home-button', function() {returnHome(battleSection)}})
+		createNewButton({parent: header, elements:battleSection, innerText: 'Reset Score', class: 'reset-button', function() {resetScore()}})
 	battleSection.appendChild(header)
+}
+
+function createNewButton(properties) {
+	var button = document.createElement('button')
+	button.classList.add(properties.class)
+	button.innerText = properties.innerText
+	properties.parent.appendChild(button)
+	button.addEventListener('click', function() {
+		properties.function()
+	})
+}
+
+function resetScore() {
+	for(var i = 0; i < currentPlayers.length; i++) {
+		currentPlayers[i].wins = 0;
+	}
+	generateScores()
+}
+
+function returnHome(battleSection) {
+	battleSection.remove()
+	topDisplay.classList.remove('hidden')
 }
 
 function addGameIcons(battleSection) {
@@ -95,7 +119,7 @@ function addGameIcons(battleSection) {
 		var img = document.createElement('img')
 		img.src = currentGame.images[i].img
 		img.setAttribute('data-weapon', currentGame.weapons[i].name)
-		img.alt = currentGame.images[i].alt
+		img.alt = currentGame.images[i].alt || null;
 		img.classList.add('figures-weapon')
 		icons.appendChild(img)
 	}
@@ -118,13 +142,9 @@ function chooseWeapon(event) {
 			currentPlayers[i].takeTurn(event.target.dataset.weapon, currentGame)
 		}
 	}
-	results()
-	displayResults(battleInterface)
-}
-
-function results() {
 	currentGame.resolveResults()
 	generateScores()
+	displayResults(battleInterface)
 }
 
 function generateScores() {
@@ -135,19 +155,19 @@ function generateScores() {
 function displayResults(battleInterface) {
 	var resultsDisplay = document.createElement('section')
 	resultsDisplay.classList.add('results-display')
-	
 	for(var i = 0; i < currentGame.players.length; i++) {
 		var figure = document.createElement('figure')
-			var img = document.createElement('img')
-				img.src = currentGame.players[i].weapon.img
-				img.alt = currentGame.players[i].weapon.alt
-				img.classList.add('figures-weapon', 'results-icon')
-			var figcaption = document.createElement('figcaption')
-					figcaption.innerText = `${currentGame.players[i].name}'s Choice`
-				figure.appendChild(img)		
-				figure.appendChild(figcaption)
+		var img = document.createElement('img')
+		img.src = currentGame.players[i].weapon.img
+		img.alt = currentGame.players[i].weapon.alt
+		img.classList.add('figures-weapon', 'results-icon')
+		var figcaption = document.createElement('figcaption')
+		figcaption.innerText = `${currentGame.players[i].name}'s Choice`
+		figure.appendChild(img)		
+		figure.appendChild(figcaption)
 		resultsDisplay.appendChild(figure)
 	}
+	displayWinner(resultsDisplay)
 	if(battleInterface.lastChild.className === 'results-display') {
 		battleInterface.replaceChild(resultsDisplay, battleInterface.lastChild);
 	} else {
@@ -155,4 +175,9 @@ function displayResults(battleInterface) {
 	}
 }
 
-
+function displayWinner(resultsDisplay) {
+	var winnerPara = document.createElement('para');
+	winnerPara.classList.add('results-para')
+	winnerPara.innerText = currentGame.resolveResults()
+	resultsDisplay.appendChild(winnerPara)
+}
