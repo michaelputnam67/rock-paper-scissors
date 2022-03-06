@@ -4,7 +4,7 @@ class Game {
 		this.images = game.images
 		this.weapons = game.weapons;
 		this.description = game.description;
-		this.players = []
+		this.players = [];
 	}
 
 	addPlayers(player) {

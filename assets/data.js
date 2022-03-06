@@ -6,9 +6,10 @@ var classic = {
 			{img:'assets/Icons/rock-2.png', alt:'rock icon'},
 			{img:'assets/Icons/scissors.png', alt:'scissors icon'}],
 	weapons: [
-	{name: "paper", strongAgainst: ['rock']},
-	{name: "rock", strongAgainst: ['scissors']},
-	{name: "scissors", strongAgainst: ['paper']},]
+		{name: "paper", strongAgainst: ['rock'], img:'assets/Icons/paper.png', alt:'paper icon'},
+		{name: "rock", strongAgainst: ['scissors'], img:'assets/Icons/rock-2.png', alt:'rock icon'},
+		{name: "scissors", strongAgainst: ['paper'], img:'assets/Icons/scissors.png', alt:'scissors icon'},]
+		
 }
 
 var alternate = {
@@ -22,12 +23,12 @@ var alternate = {
 		{img:'assets/Icons/heart.png', alt:'heart icon'}
 	],
 	weapons: [
-	{name: 'earth', strongAgainst: ['fire', 'wind']},
-	{name: 'fire', strongAgainst: ['heart', 'wind']},
-	{name: 'wind', strongAgainst: ['water', 'heart']},
-	{name: 'water', strongAgainst: ['fire', 'earth']},
-	{name: 'heart', strongAgainst: ['water', 'earth']}]
-}
+		{name: 'earth', strongAgainst: ['fire', 'wind'],img:'assets/Icons/rock.png', alt:'rock icon'},
+		{name: 'fire', strongAgainst: ['heart', 'wind'],img:'assets/Icons/flames.png', alt:'flames icon'},
+		{name: 'wind', strongAgainst: ['water', 'heart'],img:'assets/Icons/wind.png', alt:'wind icon'},
+		{name: 'water', strongAgainst: ['fire', 'earth'],img:'assets/Icons/water.png', alt:'water icon'},
+		{name: 'heart', strongAgainst: ['water', 'earth'], img:'assets/Icons/heart.png', alt:'heart icon'}]
+	}
 
 var avatar = [
 	'./assets/Icons/chick.png',

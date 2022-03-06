@@ -20,7 +20,7 @@
 		</section>
 		<main id="main">
 			<section class="top-display" id="homeTopView">
-				<h1>Rock, Paper Scissors</h1>
+				<h1>Rock Paper Scissors</h1>
 				<section class="display-games" id="gameOptions">
 					<button id="classic" data-game="classic">
 						<section class="games games-classic" data-game="classic">
@@ -39,22 +39,22 @@
 				<section class="display-player">
 					<section class="player-box">
 						<figure class="player-avatar">
-							<img src="assets/Icons/evilComputer.png" alt="evil-computer">
+							<img id="userAvatar" src="assets/Icons/dinosaur.png" alt="dinosaur">
 						</figure>
-						<label class="player-name">Computer</label>
+						<label class="player-name" id="userName">User</label>
 					</section>
-					<div class="tally" id="computerScore">
+					<div class="tally" id="userScore">
 						Wins = 0
 					</div>
 				</section>
 				<section class="display-player">
 					<section class="player-box">
 						<figure class="player-avatar">
-							<img id="userAvatar" src="assets/Icons/dinosaur.png" alt="dinosaur">
+							<img src="assets/Icons/evilComputer.png" alt="evil-computer">
 						</figure>
-						<label class="player-name" id="userName">User</label>
+						<label class="player-name">Computer</label>
 					</section>
-					<div class="tally" id="userScore">
+					<div class="tally" id="computerScore">
 						Wins = 0
 					</div>
 				</section>

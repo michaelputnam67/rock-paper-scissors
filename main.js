@@ -1,12 +1,3 @@
-// var game = new Game(alternate)
-// var player1 = new Player()
-// var player2 = new Player('Daniel')
-// game.addPlayers(player1)
-// game.addPlayers(player2)
-// player1.takeTurn()
-// player2.takeTurn(alternate.weapons[3])
-// player2.chooseAvatar()
-// console.log(game.resolveResults())
 //~~~~~~~~~~~~~~~~~Globals~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 var currentPlayers = []
 var currentGame;
@@ -24,7 +15,7 @@ var main = document.getElementById('main')
 var gameDisplay = document.getElementById('gameOptions')
 
 //~~~~~~~~~~~~~~~~~~EVENT LISTENERS~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// window.addEventListener('load', displayForm)
+window.addEventListener('load', displayForm)
 avatarButton.addEventListener('click', changeFormAvatarIcon)
 
 generateUserButton.addEventListener('click', function() {
@@ -60,20 +51,13 @@ function generatePlayerOne() {
 function populateUserData() {
 	document.getElementById('userAvatar').src = currentPlayers[0].token;
 	document.getElementById('userName').innerText = currentPlayers[0].name;
-	if(currentPlayers[0].score) {
-		document.getElementById('userScore').innerText = `Wins = ${currentPlayers[0].score}`;
-	}
-	if(currentPlayers[1].score) {
-		document.getElementById('computerScore').innerText = `Wins = ${currentPlayers[1].score}`;
-	}
+	generateScores()
 }
 
 function startNewGame(event) {
-	console.log(event.target.dataset.game)
 	if(event.target.dataset.game === "classic" || event.target.dataset.game === "alternate") {
 		currentGame = new Game(eval(event.target.dataset.game))
 		currentGame.addPlayers(currentPlayers)
-		console.log(currentGame)
 		switchToAlternateBattleWindow()
 		addDisplayEventListener()	
 	}
@@ -97,21 +81,35 @@ function addLabel(battleSection) {
 	battleSection.appendChild(label)
 }
 
-function addDisplayEventListener() {
-	var battleInterface = document.getElementById('battleInterface')
-	battleInterface.addEventListener('click', function(event) {
-		test(event)
-	})
-}
-
-function test(event) {
-	console.log(event.target)
-}
 
 function addHeader(battleSection) {
 	var header = document.createElement('h1')
 	header.innerText = currentGame.name
+		createNewButton ({parent: header, elements: battleSection, innerText: 'Return Home', class: 'return-home-button', function() {returnHome(battleSection)}})
+		createNewButton({parent: header, elements:battleSection, innerText: 'Reset Score', class: 'reset-button', function() {resetScore()}})
 	battleSection.appendChild(header)
+}
+
+function createNewButton(properties) {
+	var button = document.createElement('button')
+	button.classList.add(properties.class)
+	button.innerText = properties.innerText
+	properties.parent.appendChild(button)
+	button.addEventListener('click', function() {
+		properties.function()
+	})
+}
+
+function resetScore() {
+	for(var i = 0; i < currentPlayers.length; i++) {
+		currentPlayers[i].wins = 0;
+	}
+	generateScores()
+}
+
+function returnHome(battleSection) {
+	battleSection.remove()
+	topDisplay.classList.remove('hidden')
 }
 
 function addGameIcons(battleSection) {
@@ -121,9 +119,65 @@ function addGameIcons(battleSection) {
 		var img = document.createElement('img')
 		img.src = currentGame.images[i].img
 		img.setAttribute('data-weapon', currentGame.weapons[i].name)
-		img.alt = currentGame.images[i].alt
+		img.alt = currentGame.images[i].alt || null;
 		img.classList.add('figures-weapon')
 		icons.appendChild(img)
 	}
 	battleSection.appendChild(icons)
+}
+
+function addDisplayEventListener() {
+	var battleInterface = document.getElementById('battleInterface')
+	battleInterface.addEventListener('click', function(event) {
+		chooseWeapon(event)
+	})
+}
+
+function chooseWeapon(event) {
+	if(!event.target.dataset.weapon) {
+		return
+	}
+	if(event.target.dataset.weapon) {
+		for(var i = 0; i < currentPlayers.length; i++) {
+			currentPlayers[i].takeTurn(event.target.dataset.weapon, currentGame)
+		}
+	}
+	currentGame.resolveResults()
+	generateScores()
+	displayResults(battleInterface)
+}
+
+function generateScores() {
+		document.getElementById('userScore').innerText = `Wins = ${currentPlayers[0].wins}`;
+		document.getElementById('computerScore').innerText = `Wins = ${currentPlayers[1].wins}`;
+}
+
+function displayResults(battleInterface) {
+	var resultsDisplay = document.createElement('section')
+	resultsDisplay.classList.add('results-display')
+	for(var i = 0; i < currentGame.players.length; i++) {
+		var figure = document.createElement('figure')
+		var img = document.createElement('img')
+		img.src = currentGame.players[i].weapon.img
+		img.alt = currentGame.players[i].weapon.alt
+		img.classList.add('figures-weapon', 'results-icon')
+		var figcaption = document.createElement('figcaption')
+		figcaption.innerText = `${currentGame.players[i].name}'s Choice`
+		figure.appendChild(img)		
+		figure.appendChild(figcaption)
+		resultsDisplay.appendChild(figure)
+	}
+	displayWinner(resultsDisplay)
+	if(battleInterface.lastChild.className === 'results-display') {
+		battleInterface.replaceChild(resultsDisplay, battleInterface.lastChild);
+	} else {
+		battleInterface.appendChild(resultsDisplay)
+	}
+}
+
+function displayWinner(resultsDisplay) {
+	var winnerPara = document.createElement('para');
+	winnerPara.classList.add('results-para')
+	winnerPara.innerText = currentGame.resolveResults()
+	resultsDisplay.appendChild(winnerPara)
 }
