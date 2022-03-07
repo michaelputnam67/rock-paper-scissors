@@ -5,11 +5,11 @@ class Player {
 		this.wins = 0;
 		this.weapon = {} 
 		this.weaponsChoice = []
-	}	
+	}	;
 
-	takeTurn(playerChoice, currentGame) {
+	takeTurn(playerChoice) {
 		if(this.name === 'computer') {
-			this.weapon = this.weaponsChoice[Math.floor(Math.random() * this.weaponsChoice.length)]
+			this.weapon = this.weaponsChoice[Math.floor(Math.random() * this.weaponsChoice.length)];
 		} else {
 			for(var i = 0; i < this.weaponsChoice.length; i++) {
 				if(this.weaponsChoice[i].name === playerChoice) {
@@ -18,9 +18,9 @@ class Player {
 				}
 			}
 		}
-	}
+	};
 
 	chooseAvatar() {
 		this.token = avatar[Math.floor(Math.random() * avatar.length)]
-	}
-}
+	};
+};
