@@ -23,7 +23,7 @@ html, body, .screen {
 	display: flex;
 	justify-content: center;
 	background-color: rgb(119, 162, 205);
-	opacity: 95%;
+	opacity: 92%;
 	border: black solid 2px;
 	height: 300px;
 	width: 500px;
@@ -33,6 +33,14 @@ html, body, .screen {
 	justify-self: center;
 	z-index: 1;
 
+}
+
+.form-button:hover {
+	background-color: #49B8E9;
+	height: 21%;
+	width: 73%;
+	box-shadow: 2px 2px 2px;
+	cursor: pointer;
 }
 
 .user-name {
