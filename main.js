@@ -1,183 +1,172 @@
 //~~~~~~~~~~~~~~~~~Globals~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-var currentPlayers = []
+var currentPlayers = [];
 var currentGame;
 
 //~~~~~~~~~~~~~~~~~~SELECTORS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-var avatarButton = document.querySelector('.change-avatar')
-var generateUserButton = document.querySelector('.generate-user')
-var userNameInput = document.querySelector('.user-name')
-var formAvatarIcon = document.querySelector('.avatar-icon')
-var alternateButton = document.getElementById('alternate')
-var classicButton = document.getElementById('classic')
-var topDisplay = document.getElementById('homeTopView')
-var bottomDisplay = document.getElementById('playerDisplay')
-var main = document.getElementById('main')
-var gameDisplay = document.getElementById('gameOptions')
+var avatarButton = document.querySelector('.change-avatar');
+var generateUserButton = document.querySelector('.generate-user');
+var userNameInput = document.getElementById('userNameInput');
+var formAvatarIcon = document.querySelector('.avatar-icon');
+var alternateButton = document.getElementById('alternate');
+var classicButton = document.getElementById('classic');
+var topDisplay = document.getElementById('homeTopView');
+var bottomDisplay = document.getElementById('playerDisplay');
+var main = document.getElementById('main');
+var gameDisplay = document.getElementById('gameOptions');
 
 //~~~~~~~~~~~~~~~~~~EVENT LISTENERS~~~~~~~~~~~~~~~~~~~~~~~~~~~
-window.addEventListener('load', displayForm)
-avatarButton.addEventListener('click', changeFormAvatarIcon)
+window.addEventListener('load', displayForm);
+avatarButton.addEventListener('click', changeFormAvatarIcon);
+
+console.log(userNameInput.value)
 
 generateUserButton.addEventListener('click', function() {
 	event.preventDefault()
 	generatePlayerOne()
-})
+});
 
 gameDisplay.addEventListener('click', function(event){
 	startNewGame(event)
-})
+});
 
 //~~~~~~~~~~~~~~~~~~~FUNCTIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 function displayForm() {
-	document.querySelector('.screen').classList.remove('hidden')
-	document.querySelector('.form').classList.remove('hidden')
-}
+	document.querySelector('.screen').classList.remove('hidden');
+	document.querySelector('.form').classList.remove('hidden');
+};
 
 function changeFormAvatarIcon() {
-	formAvatarIcon.src = avatar[Math.floor(Math.random() * avatar.length)]
-}
+	formAvatarIcon.src = avatar[Math.floor(Math.random() * avatar.length)];
+};
 
 function generatePlayerOne() {
 	if(userNameInput.value) {
-		currentPlayers.push(new Player(userNameInput.value))
-		currentPlayers[0].token = formAvatarIcon.src
-		currentPlayers.push(new Player)
-		populateUserData()
-		document.querySelector('.screen').classList.add('hidden')
-		document.querySelector('.form').classList.add('hidden')
-	}
-}
+		currentPlayers.push(new Player(userNameInput.value));
+		currentPlayers[0].token = formAvatarIcon.src;
+		currentPlayers.push(new Player);
+		populateUserData();
+		document.querySelector('.screen').classList.add('hidden');
+		document.querySelector('.form').classList.add('hidden');
+	};
+};
 
 function populateUserData() {
 	document.getElementById('userAvatar').src = currentPlayers[0].token;
 	document.getElementById('userName').innerText = currentPlayers[0].name;
-	generateScores()
-}
+	generateScores();
+};
 
 function startNewGame(event) {
 	if(event.target.dataset.game === "classic" || event.target.dataset.game === "alternate") {
-		currentGame = new Game(eval(event.target.dataset.game))
-		currentGame.addPlayers(currentPlayers)
-		switchToAlternateBattleWindow()
-		addDisplayEventListener()	
-	}
-}
+		currentGame = new Game(eval(event.target.dataset.game));
+		currentGame.addPlayers(currentPlayers);
+		switchToAlternateBattleWindow();
+	};
+};
 
 function switchToAlternateBattleWindow() {
-	topDisplay.classList.add('hidden')
-	var battleSection = document.createElement('section')
-	battleSection.id = 'battleInterface'
-	battleSection.classList.add('top-display')
-	addHeader(battleSection)
-	addGameIcons(battleSection)
-	addLabel(battleSection)
-	main.insertBefore(battleSection, bottomDisplay)
-}
+	topDisplay.classList.add('hidden');
+	var battleSection = createElement({tag:'section', class:['top-display'], id:'battleInterface', needEL:true, event:'click', function(e){chooseWeapon(e)}});
+	addHeader(battleSection);
+	addGameIcons(battleSection);
+	addLabel(battleSection);
+	main.insertBefore(battleSection, bottomDisplay);
+};
 
 function addLabel(battleSection) {
-	var label = document.createElement('p')
-	label.classList.add('game-description')
-	label.innerText = currentGame.description
-	battleSection.appendChild(label)
-}
-
+	var label = createElement({tag:'p', class:['game-description'], innerText:currentGame.description});
+	battleSection.appendChild(label);
+};
 
 function addHeader(battleSection) {
-	var header = document.createElement('h1')
-	header.innerText = currentGame.name
-		createNewButton ({parent: header, elements: battleSection, innerText: 'Return Home', class: 'return-home-button', function() {returnHome(battleSection)}})
-		createNewButton({parent: header, elements:battleSection, innerText: 'Reset Score', class: 'reset-button', function() {resetScore()}})
-	battleSection.appendChild(header)
-}
-
-function createNewButton(properties) {
-	var button = document.createElement('button')
-	button.classList.add(properties.class)
-	button.innerText = properties.innerText
-	properties.parent.appendChild(button)
-	button.addEventListener('click', function() {
-		properties.function()
-	})
-}
+	var header = createElement({tag:'h1', innerText: currentGame.name});
+		header.appendChild(createElement({tag:'button', innerText:'Return Home', class:['return-home-button'], needEL:true, event:'click', function() {returnHome(battleSection)}}));
+		header.appendChild(createElement({tag:'button', innerText:'Reset Score', needEL:true, class:['reset-button'], event:'click', function() {resetScore()}}));
+	battleSection.appendChild(header);
+};
 
 function resetScore() {
 	for(var i = 0; i < currentPlayers.length; i++) {
 		currentPlayers[i].wins = 0;
-	}
-	generateScores()
-}
+	};
+	generateScores();
+};
 
 function returnHome(battleSection) {
-	battleSection.remove()
-	topDisplay.classList.remove('hidden')
-}
+	battleSection.remove();
+	topDisplay.classList.remove('hidden');
+};
+
+function createElement(object) {
+	var element = document.createElement(object.tag);
+	if(object.class) {
+		element.classList.add(...object.class)
+	};
+	element.src = object.src || null;
+	element.alt = object.alt || null;
+	element.id = object.id || null;
+	element.innerText = object.innerText || null;
+	if(object.needEL) {
+		element.addEventListener(object.event, function(e){
+			object.function(e)
+		})
+	};
+	return element;
+};
 
 function addGameIcons(battleSection) {
-	var icons = document.createElement('div')
-	icons.classList.add('game-view-weapons')
+	var icons = createElement({tag:'div', class:['game-view-weapons']});
 	for(var i = 0; i < currentGame.images.length; i++) {
-		var img = document.createElement('img')
-		img.src = currentGame.images[i].img
-		img.setAttribute('data-weapon', currentGame.weapons[i].name)
-		img.alt = currentGame.images[i].alt || null;
-		img.classList.add('figures-weapon')
-		icons.appendChild(img)
-	}
-	battleSection.appendChild(icons)
-}
-
-function addDisplayEventListener() {
-	var battleInterface = document.getElementById('battleInterface')
-	battleInterface.addEventListener('click', function(event) {
-		chooseWeapon(event)
-	})
-}
+		img = createElement({tag:'img', src: currentGame.images[i].img, alt:currentGame.images[i].alt, class:['figures-weapon', 'test1', 'test2']})
+		img.setAttribute('data-weapon', currentGame.weapons[i].name);
+		icons.appendChild(img);
+	};
+	battleSection.appendChild(icons);
+};
 
 function chooseWeapon(event) {
 	if(!event.target.dataset.weapon) {
 		return
-	}
+	};
 	if(event.target.dataset.weapon) {
 		for(var i = 0; i < currentPlayers.length; i++) {
 			currentPlayers[i].takeTurn(event.target.dataset.weapon, currentGame)
-		}
-	}
-	currentGame.resolveResults()
-	generateScores()
-	displayResults(battleInterface)
-}
+		};
+	};
+	if(!currentGame.timeOut) {
+		currentGame.timeOut = true;
+		currentGame.resolveResults();
+		generateScores();
+		displayResults();
+	};
+};
 
 function generateScores() {
 		document.getElementById('userScore').innerText = `Wins = ${currentPlayers[0].wins}`;
 		document.getElementById('computerScore').innerText = `Wins = ${currentPlayers[1].wins}`;
-}
+};
 
-function displayResults(battleInterface) {
-	var resultsDisplay = document.createElement('section')
-	resultsDisplay.classList.add('results-display')
+function displayResults() {
+	var resultsDisplay = createElement({tag:'section', class:['results-display']});
 	for(var i = 0; i < currentGame.players.length; i++) {
-		var figure = document.createElement('figure')
-		var img = document.createElement('img')
-		img.src = currentGame.players[i].weapon.img
-		img.alt = currentGame.players[i].weapon.alt
-		img.classList.add('figures-weapon', 'results-icon')
-		var figcaption = document.createElement('figcaption')
-		figcaption.innerText = `${currentGame.players[i].name}'s Choice`
-		figure.appendChild(img)		
-		figure.appendChild(figcaption)
-		resultsDisplay.appendChild(figure)
-	}
-	displayWinner(resultsDisplay)
+		var figure = createElement({tag:'figure'});
+			figure.appendChild(createElement({tag:'img', src:currentGame.players[i].weapon.img, alt:currentGame.players[i].weapon.alt, class:['results-icon']}));
+			figure.appendChild(createElement({tag:'figcaption', innerText:`${currentGame.players[i].name}'s Choice`}));
+		resultsDisplay.appendChild(figure);
+	};
+	displayWinner(resultsDisplay);
+};
+
+function displayWinner(resultsDisplay) {
 	if(battleInterface.lastChild.className === 'results-display') {
 		battleInterface.replaceChild(resultsDisplay, battleInterface.lastChild);
 	} else {
-		battleInterface.appendChild(resultsDisplay)
+		battleInterface.appendChild(resultsDisplay);
 	}
-}
-
-function displayWinner(resultsDisplay) {
-	var winnerPara = document.createElement('para');
-	winnerPara.classList.add('results-para')
-	winnerPara.innerText = currentGame.resolveResults()
-	resultsDisplay.appendChild(winnerPara)
-}
+	var winnerPara = createElement({tag:'para', class:['results-para'], innerText:currentGame.results});
+	resultsDisplay.appendChild(winnerPara);
+	setTimeout(function() {
+		currentGame.timeOut = false;
+		resultsDisplay.remove();
+	}, 2000);
+};

@@ -2,20 +2,25 @@
 <html lang="en" dir="ltr">
 	<head>
 		<meta charset="utf-8">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="./styles.css">
+		
 	</head>
 	<body>
 		<div class="screen hidden"></div>
 		<section class="form hidden">
 			<section class="form-avatar">
 				<img class="avatar-icon" src="assets/Icons/dinosaur.png" alt="dinosur">
-				<button class="change-avatar">change avatar</button>
-				<label for="change-avatar">Toggle through and Pick an Avatar!</label>
+				<button class="change-avatar form-button">Change Avatar</button>
 			</section>
 			<form class="user-generation">
-				<input type="text" name="user" id="name" class="user-name" maxLength="9">
-				<label for="name">Please input a name for your player!</label>
-				<button class='generate-user' type=submit>Generate Player</button>
+				<div>
+					<input type="text" name="user" id="userNameInput" class="user-name" maxLength="9">
+					<label for="userName">Please input a name for your player!</label>
+				</div>
+				<button class='generate-user form-button'>Generate Player</button>
 			</form>
 		</section>
 		<main id="main">
@@ -66,37 +71,3 @@
 	<script type="text/javascript" src="game-class.js"></script>
 	<script type="text/javascript" src="main.js"></script>
 </html>
-
-
-
-<!-- 
-<li class='games-figures alternate' data-game="alternate">
-	<figure class="figures-weapon" data-game="alternate">
-		<img src="assets/Icons/rock.png" alt="rock icon">
-	</figure>
-	<figure class="figures-weapon" data-game="alternate">
-		<img src="assets/Icons/flames.png" alt="flames icon">
-	</figure>
-	<figure class="figures-weapon" data-game="alternate">
-		<img src="assets/Icons/wind.png" alt="wind icon">
-	</figure>
-	<figure class="figures-weapon" data-game="alternate">
-		<img src="assets/Icons/water.png" alt="water icon">
-	</figure>
-	<figure class="figures-weapon" data-game="alternate">
-		<img src="assets/Icons/heart.png" alt="hand holding heart icon">
-	</figure>
-</li> -->
-
-
-<!-- <li class="games-figures classic" data-game="classic">
-	<figure class="figures-weapon" data-game="classic">
-		<img src="assets/Icons/rock-2.png" alt="rock icon">
-	</figure>
-	<figure class="figures-weapon" data-game="classic">
-		<img src="assets/Icons/paper.png" alt="news paper icon">
-	</figure>
-	<figure class="figures-weapon" data-game="classic">
-		<img src="assets/Icons/scissors.png" alt="scissors icon">
-	</figure>
-</li> -->
