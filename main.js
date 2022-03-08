@@ -16,9 +16,8 @@ var gameDisplay = document.getElementById('gameOptions');
 
 //~~~~~~~~~~~~~~~~~~EVENT LISTENERS~~~~~~~~~~~~~~~~~~~~~~~~~~~
 window.addEventListener('load', displayForm);
-avatarButton.addEventListener('click', changeFormAvatarIcon);
 
-console.log(userNameInput.value)
+avatarButton.addEventListener('click', changeFormAvatarIcon);
 
 generateUserButton.addEventListener('click', function() {
 	event.preventDefault()
@@ -60,41 +59,8 @@ function startNewGame(event) {
 	if(event.target.dataset.game === "classic" || event.target.dataset.game === "alternate") {
 		currentGame = new Game(eval(event.target.dataset.game));
 		currentGame.addPlayers(currentPlayers);
-		switchToAlternateBattleWindow();
+		switchToBattleWindow();
 	};
-};
-
-function switchToAlternateBattleWindow() {
-	topDisplay.classList.add('hidden');
-	var battleSection = createElement({tag:'section', class:['top-display'], id:'battleInterface', needEL:true, event:'click', function(e){chooseWeapon(e)}});
-	addHeader(battleSection);
-	addGameIcons(battleSection);
-	addLabel(battleSection);
-	main.insertBefore(battleSection, bottomDisplay);
-};
-
-function addLabel(battleSection) {
-	var label = createElement({tag:'p', class:['game-description'], innerText:currentGame.description});
-	battleSection.appendChild(label);
-};
-
-function addHeader(battleSection) {
-	var header = createElement({tag:'h1', innerText: currentGame.name});
-		header.appendChild(createElement({tag:'button', innerText:'Return Home', class:['return-home-button'], needEL:true, event:'click', function() {returnHome(battleSection)}}));
-		header.appendChild(createElement({tag:'button', innerText:'Reset Score', needEL:true, class:['reset-button'], event:'click', function() {resetScore()}}));
-	battleSection.appendChild(header);
-};
-
-function resetScore() {
-	for(var i = 0; i < currentPlayers.length; i++) {
-		currentPlayers[i].wins = 0;
-	};
-	generateScores();
-};
-
-function returnHome(battleSection) {
-	battleSection.remove();
-	topDisplay.classList.remove('hidden');
 };
 
 function createElement(object) {
@@ -114,6 +80,23 @@ function createElement(object) {
 	return element;
 };
 
+function switchToBattleWindow() {
+	topDisplay.classList.add('hidden');
+	var battleSection = createElement({tag:'section', class:['top-display'], id:'battleInterface', needEL:true, event:'click', function(e){chooseWeapon(e)}});
+	addHeader(battleSection);
+	addGameIcons(battleSection);
+	addLabel(battleSection);
+	main.insertBefore(battleSection, bottomDisplay);
+};
+
+function addHeader(battleSection) {
+	var header = createElement({tag:'h1', class:['game-header']});
+		header.appendChild(createElement({tag:'p', innerText: currentGame.name}))
+		header.appendChild(createElement({tag:'button', innerText:'Return Home', class:['return-home-button'], needEL:true, event:'click', function() {returnHome(battleSection)}}));
+		header.appendChild(createElement({tag:'button', innerText:'Reset Score', needEL:true, class:['reset-button'], event:'click', function() {resetScore()}}));
+	battleSection.appendChild(header);
+};
+
 function addGameIcons(battleSection) {
 	var icons = createElement({tag:'div', class:['game-view-weapons']});
 	for(var i = 0; i < currentGame.images.length; i++) {
@@ -122,6 +105,23 @@ function addGameIcons(battleSection) {
 		icons.appendChild(img);
 	};
 	battleSection.appendChild(icons);
+};
+
+function addLabel(battleSection) {
+	var label = createElement({tag:'p', class:['game-description'], innerText:currentGame.description});
+	battleSection.appendChild(label);
+};
+
+function resetScore() {
+	for(var i = 0; i < currentPlayers.length; i++) {
+		currentPlayers[i].wins = 0;
+	};
+	generateScores();
+};
+
+function returnHome(battleSection) {
+	battleSection.remove();
+	topDisplay.classList.remove('hidden');
 };
 
 function chooseWeapon(event) {
@@ -149,11 +149,13 @@ function generateScores() {
 function displayResults() {
 	var resultsDisplay = createElement({tag:'section', class:['results-display']});
 	for(var i = 0; i < currentGame.players.length; i++) {
-		var figure = createElement({tag:'figure'});
+		var figure = createElement({tag:'figure', class:['figure-result']});
 			figure.appendChild(createElement({tag:'img', src:currentGame.players[i].weapon.img, alt:currentGame.players[i].weapon.alt, class:['results-icon']}));
 			figure.appendChild(createElement({tag:'figcaption', innerText:`${currentGame.players[i].name}'s Choice`}));
 		resultsDisplay.appendChild(figure);
 	};
+	var winnerPara = createElement({tag:'para', class:['results-para'], innerText:currentGame.results});
+	resultsDisplay.insertBefore(winnerPara, figure);
 	displayWinner(resultsDisplay);
 };
 
@@ -163,10 +165,8 @@ function displayWinner(resultsDisplay) {
 	} else {
 		battleInterface.appendChild(resultsDisplay);
 	}
-	var winnerPara = createElement({tag:'para', class:['results-para'], innerText:currentGame.results});
-	resultsDisplay.appendChild(winnerPara);
 	setTimeout(function() {
 		currentGame.timeOut = false;
 		resultsDisplay.remove();
-	}, 2000);
+	}, 3000);
 };
