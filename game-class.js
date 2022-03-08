@@ -22,7 +22,7 @@ class Game {
 			var index = i + number;
 			if(this.players[i].weapon.strongAgainst.includes(this.players[index].weapon.name)) {
 				this.players[i].wins++;
-				this.results = `${this.players[i].name} wins!`
+				this.results = `${this.players[i].name} Wins!`
 				return;
 			} number = -1;
 		}	
