@@ -12,7 +12,7 @@
 		<div class="screen hidden"></div>
 		<section class="form hidden">
 			<section class="form-avatar">
-				<img class="avatar-icon" src="assets/Icons/dinosaur.png" alt="dinosur">
+				<img class="avatar-icon" src='assets/Icons/avatars/dinosaur.png' alt="dinosaur">
 				<button class="change-avatar form-button">Change Avatar</button>
 			</section>
 			<form class="user-generation">
@@ -27,12 +27,12 @@
 			<section class="top-display" id="homeTopView">
 				<h1>Rock Paper Scissors</h1>
 				<section class="display-games" id="gameOptions">
-					<button id="classic" data-game="classic">
+					<button class="game-selection-button" id="classic" data-game="classic">
 						<section class="games games-classic" data-game="classic">
 							<h2>Classic</h2>
 						</section>
 					</button>
-					<button id="alternate" data-game="alternate">
+					<button class="game-selection-button" id="alternate" data-game="alternate">
 						<section class="games games-bote" data-game="alternate">
 							<h2 data-game="alternate">Battle of the Elements</h2>						
 						</section>
@@ -44,7 +44,7 @@
 				<section class="display-player">
 					<section class="player-box">
 						<figure class="player-avatar">
-							<img id="userAvatar" src="assets/Icons/dinosaur.png" alt="dinosaur">
+							<img id="userAvatar" src="assets/Icons/avatars/dinosaur.png" alt="dinosaur">
 						</figure>
 						<label class="player-name" id="userName">User</label>
 					</section>
@@ -55,7 +55,7 @@
 				<section class="display-player">
 					<section class="player-box">
 						<figure class="player-avatar">
-							<img src="assets/Icons/evilComputer.png" alt="evil-computer">
+							<img src="assets/Icons/avatars/evilComputer.png" alt="evil-computer">
 						</figure>
 						<label class="player-name">Computer</label>
 					</section>

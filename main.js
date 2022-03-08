@@ -79,7 +79,8 @@ function addLabel(battleSection) {
 };
 
 function addHeader(battleSection) {
-	var header = createElement({tag:'h1', innerText: currentGame.name});
+	var header = createElement({tag:'h1', class:['game-header']});
+		header.appendChild(createElement({tag:'p', innerText: currentGame.name}))
 		header.appendChild(createElement({tag:'button', innerText:'Return Home', class:['return-home-button'], needEL:true, event:'click', function() {returnHome(battleSection)}}));
 		header.appendChild(createElement({tag:'button', innerText:'Reset Score', needEL:true, class:['reset-button'], event:'click', function() {resetScore()}}));
 	battleSection.appendChild(header);
