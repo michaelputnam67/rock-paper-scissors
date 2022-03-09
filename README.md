@@ -26,10 +26,17 @@ The project is not live so you will need to open it on your local computer
 - In the middle of the page you will see the rules. 
 - Once on the battle page select one of the weapon icons at the top of the page and see if you won!
 - Results are displayed below the rule sets for each game and the scores will be adjusted accordingly. 
+
+![Results Image](assets/win-screen.png "Win Screen")
+
 - If you would like to reset your score you can press the reset score button on the upper right hand side of the screen. 
+
+![Reset Score button](assets/reset-score.png "Reset Score Button")
+
 - To return to the home screen press the button called return home on the upper left side of the screen. From the home screen the user can select a new game to play. 
 
-![alt text](/assets/images/mini-palette.png "Lock Icon")
+![Reset Score button](assets/reset-score.png "Reset Score Button")
+
 
 ### Future Additions
 - In the future I would like the option to add a muliplayer version with more computer for the player to play against. This version would be an elimination style game with players getting slowly knocked out. 
