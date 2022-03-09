@@ -18,8 +18,12 @@ open index.html
 The project is not live so you will need to open it on your local computer
 
 #### Execution
+
 ##### Home Screen
 - After filling out the form you will be taken to a home-page. The Users name, avatar and score appear below alongside the computer. 
+
+![Form Screen Image](assets/player-form.png "Form Screen Snapshot")
+
 - In the middle of the screen are two options called Classic and Battle of the Elements. Simply click one to go to the main screen for that game. 
 
 ##### Game Display
